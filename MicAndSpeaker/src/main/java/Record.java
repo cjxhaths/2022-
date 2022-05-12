@@ -9,6 +9,7 @@ public class Record extends Thread{
     int baosBufIndex = 0;
     TargetDataLine targetDataLine;
     AudioFormat af;
+    int cnt;
     public Record() throws LineUnavailableException {
         af = getAudioFormat();
         fileName = "record.wav";
@@ -16,6 +17,17 @@ public class Record extends Thread{
         targetDataLine.open();
         targetDataLine.start();
         fileByte = new byte[0];
+    }
+    public Record(int cnt) throws LineUnavailableException {
+        af = getAudioFormat();
+        fileName = "record"+cnt+".wav";
+        targetDataLine = AudioSystem.getTargetDataLine(af);
+        if(!targetDataLine.isOpen()){
+            targetDataLine.open();
+        }
+        targetDataLine.start();
+        fileByte = new byte[0];
+        this.cnt = cnt;
     }
     @SneakyThrows
     @Override
@@ -41,6 +53,7 @@ public class Record extends Thread{
         ByteArrayInputStream bais = new ByteArrayInputStream(fileByte);
         AudioInputStream ais = new AudioInputStream(bais,af,44100*8/af.getFrameSize());
         AudioSystem.write(ais,AudioFileFormat.Type.WAVE,file);
+        targetDataLine.close();
         log.info("record end");
     }
     private AudioFormat getAudioFormat(){
