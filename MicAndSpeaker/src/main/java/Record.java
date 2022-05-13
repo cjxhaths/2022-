@@ -12,7 +12,7 @@ public class Record extends Thread{
     int cnt;
     public Record() throws LineUnavailableException {
         af = getAudioFormat();
-        fileName = "record.wav";
+        fileName = "../Record/record.wav";
         targetDataLine = AudioSystem.getTargetDataLine(af);
         targetDataLine.open();
         targetDataLine.start();
