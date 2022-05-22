@@ -20,7 +20,7 @@ public class Record extends Thread{
     }
     public Record(int cnt) throws LineUnavailableException {
         af = getAudioFormat();
-        fileName = "record_amylum"+cnt+".wav";
+        fileName = "../Record/cola_nogas/record"+cnt+".wav";
         targetDataLine = AudioSystem.getTargetDataLine(af);
         if(!targetDataLine.isOpen()){
             targetDataLine.open();
