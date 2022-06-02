@@ -6,7 +6,6 @@ import java.io.*;
 public class Record extends Thread{
     byte[] fileByte;
     String fileName;
-    int baosBufIndex = 0;
     TargetDataLine targetDataLine;
     AudioFormat af;
     int cnt;
@@ -20,7 +19,7 @@ public class Record extends Thread{
     }
     public Record(int cnt) throws LineUnavailableException {
         af = getAudioFormat();
-        fileName = "../Record/cola_nogas/record"+cnt+".wav";
+        fileName = "../Record/volume/300/record"+cnt+".wav";
         targetDataLine = AudioSystem.getTargetDataLine(af);
         if(!targetDataLine.isOpen()){
             targetDataLine.open();
